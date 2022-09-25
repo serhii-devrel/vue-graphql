@@ -9,7 +9,7 @@ export default function useBooksQuery(id, rating) {
   } = useMutation(UPDATE_BOOK, () => ({
     variables: {
       id,
-      rating: parseFloat(rating),
+      rating: parseFloat(rating.value),
     },
   }));
 

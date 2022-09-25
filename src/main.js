@@ -6,6 +6,8 @@ import {
 } from "@apollo/client/core";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import graphql from "@rollup/plugin-graphql";
+import "ant-design-vue/dist/antd.css";
+import Antd from "ant-design-vue";
 import App from "./App.vue";
 
 const link = createHttpLink({
@@ -19,6 +21,7 @@ const apolloClient = new ApolloClient({
   cache,
 });
 
+// Plugins
 const app = createApp({
   setup() {
     provide(DefaultApolloClient, apolloClient);
@@ -26,8 +29,8 @@ const app = createApp({
   render: () => h(App),
 });
 
-// Plugins
 app.use(graphql);
+app.use(Antd);
 
 // Mounting
 app.mount("#app");

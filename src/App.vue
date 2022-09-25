@@ -1,5 +1,9 @@
 <template>
-  Search: <input v-model="pattern" />
+  <div class="search">
+    <Input v-model:value="pattern">
+      <template #addonBefore>Search:</template>
+    </Input>
+  </div>
   <div v-if="loading">Loading books...</div>
   <div v-else>
     <h2>Books:</h2>
@@ -7,34 +11,40 @@
       <li>
         [ID]: {{ book.id }}, [Title]: {{ book.title }}, [Rating]:
         {{ book.rating }}
-        <button @click="editBook = book.id">Edit Book</button>
+        <Button type="primary" @click="activeBook = book.id">Edit Book</Button>
       </li>
     </ul>
-    <template v-if="editBook">
-      <EditBook />
-    </template>
+    <EditBook
+      v-if="!!activeBook"
+      :bookId="activeBook"
+      @onEditDone="onEditDone"
+    />
   </div>
 </template>
 
 <script>
 import { ref, computed } from "vue";
+import { Button, Input } from "ant-design-vue";
 import EditBook from "./components/EditBook.vue";
 import useBooksQuery from "./composables/useBooksQuery";
-// import useBookUpdateQuery from "./composables/useBookUpdateQuery";
 
 export default {
   name: "App",
-  components: { EditBook },
+  components: { EditBook, Input, Button },
   setup() {
     const pattern = ref("");
-    const editBook = ref(null);
+    const activeBook = ref(null);
 
     const { books, loading } = useBooksQuery(
       computed(() => pattern.value),
       500
     );
 
-    return { books, editBook, loading, pattern };
+    const onEditDone = () => {
+      activeBook.value = null;
+    };
+
+    return { books, activeBook, loading, pattern, onEditDone };
   },
 };
 </script>
