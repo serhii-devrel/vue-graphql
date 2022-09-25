@@ -5,6 +5,7 @@ import {
   InMemoryCache,
 } from "@apollo/client/core";
 import { DefaultApolloClient } from "@vue/apollo-composable";
+import graphql from "@rollup/plugin-graphql";
 import App from "./App.vue";
 
 const link = createHttpLink({
@@ -25,4 +26,8 @@ const app = createApp({
   render: () => h(App),
 });
 
+// Plugins
+app.use(graphql);
+
+// Mounting
 app.mount("#app");
