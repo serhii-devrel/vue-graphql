@@ -1,7 +1,11 @@
 pipeline {
+    agent any
+
     stages {
         stage('init') {
-            echo 'Test from Jenkins file'
+            steps {
+                echo 'Test from Jenkins'
+            }
         }
     }
 }
