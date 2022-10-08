@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('init') {
+        stage('initial stage') {
             steps {
                 echo 'Test from Jenkins'
             }
