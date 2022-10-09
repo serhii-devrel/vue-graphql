@@ -26,6 +26,7 @@ export default {
   props: {
     bookId: { type: String, required: true },
   },
+
   setup(props, { emit }) {
     const rating = ref(null);
     const visible = ref(!!props.bookId);

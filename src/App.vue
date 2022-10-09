@@ -9,6 +9,8 @@
         :loading="loading"
         @editBook="(id) => (activeBook = id)"
       />
+    </div>
+    <div class="content__edit">
       <EditBook
         v-if="!!activeBook"
         :bookId="activeBook"
