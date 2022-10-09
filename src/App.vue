@@ -1,36 +1,34 @@
 <template>
-  <div class="search">
-    <Input v-model:value="pattern">
-      <template #addonBefore>Search:</template>
-    </Input>
-  </div>
-  <div v-if="loading">Loading books...</div>
-  <div v-else>
-    <h2>Books:</h2>
-    <ul v-for="book in books" :key="book.id">
-      <li>
-        [ID]: {{ book.id }}, [Title]: {{ book.title }}, [Rating]:
-        {{ book.rating }}
-        <Button type="primary" @click="activeBook = book.id">Edit Book</Button>
-      </li>
-    </ul>
-    <EditBook
-      v-if="!!activeBook"
-      :bookId="activeBook"
-      @onEditDone="onEditDone"
-    />
+  <div class="content">
+    <div class="content__search">
+      <Search v-model="pattern" />
+    </div>
+    <div class="content__books">
+      <Books
+        :books="books"
+        :loading="loading"
+        @editBook="(id) => (activeBook = id)"
+      />
+      <EditBook
+        v-if="!!activeBook"
+        :bookId="activeBook"
+        @onEditDone="onEditDone"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import { ref, computed } from "vue";
-import { Button, Input } from "ant-design-vue";
-import EditBook from "./components/EditBook.vue";
+import EditBook from "./views/EditBook.vue";
+import Books from "./views/Books.vue";
+import Search from "./shared/Search.vue";
 import useBooksQuery from "./composables/useBooksQuery";
 
 export default {
   name: "App",
-  components: { EditBook, Input, Button },
+  components: { Books, EditBook, Search },
+
   setup() {
     const pattern = ref("");
     const activeBook = ref(null);
@@ -48,3 +46,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+.content__search {
+  padding: 0 30px 0 30px;
+  margin: 10px 0 50px 0;
+}
+
+.content__books {
+  padding: 0 30px 0 30px;
+}
+</style>

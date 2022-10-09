@@ -9,6 +9,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
     "@apollo/client": "^3.6.9",
     "@rollup/plugin-graphql": "^1.1.0",
     "@vue/apollo-composable": "4.0.0-alpha.15",
