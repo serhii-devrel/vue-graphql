@@ -48,6 +48,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 .content__search {
   padding: 0 30px 0 30px;

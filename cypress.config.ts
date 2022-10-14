@@ -2,7 +2,7 @@ import { defineConfig } from "cypress";
 
 export default defineConfig({
   e2e: {
-    supportFile: false,
+    supportFile: "cypress/support/e2e.js",
     video: false,
     baseUrl: "http://localhost:8080",
     setupNodeEvents() {
